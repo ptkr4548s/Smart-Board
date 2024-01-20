@@ -1,0 +1,11 @@
+.main-cont{
+    display: flex;
+   justify-content: space-between;
+   margin: 40px 15%;
+   
+}
+
+.sub-cont{
+    border: 1px solid black;
+    padding: 40px 100px;
+}
