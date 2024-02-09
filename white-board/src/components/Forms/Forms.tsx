@@ -5,7 +5,7 @@ import Joinroom from './JoinRoomForm/Joinroom'
 interface Props{
   uuid:() =>string;
   socket:Socket
-  setUser: (user: { name: string; roomId: string; userid: string; host: boolean; presenter: boolean }) => void;
+  setUser: (user: { name: string; userId: string;  roomId: string; host: boolean; presenter: boolean }) => void;
 
 }
 

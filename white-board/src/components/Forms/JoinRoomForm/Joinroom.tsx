@@ -6,7 +6,7 @@ import { useState } from 'react';
 interface Props{
   socket:Socket
   uuid:()=>string
-  setUser: (user: { name: string; roomId: string; userid: string; host: boolean; presenter: boolean }) => void;
+  setUser: (user: { name: string; roomId: string; userId: string; host: boolean; presenter: boolean }) => void;
 }
 
 const Joinroom = ({socket,setUser,uuid}:Props) => {
@@ -20,8 +20,8 @@ const handleRoomJoin=(e:React.FormEvent)=>{
 
   const roomData={
     name,
+    userId:uuid(),
     roomId,
-    userid:uuid(),
     host:true,
     presenter:false
    };

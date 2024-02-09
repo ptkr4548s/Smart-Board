@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom'
 interface Props{
   uuid: () => string
   socket:Socket
-  setUser: (user: { name: string; roomId: string; userid: string; host: boolean; presenter: boolean }) => void;
+  setUser: (user: { name: string; roomId: string; userId: string; host: boolean; presenter: boolean }) => void;
 
 }
 const Createroom = ({uuid, socket,setUser}:Props) => {
@@ -22,8 +22,9 @@ const handleCreateRoom=(e:React.FormEvent)=>{
 
    const roomData={
     name,
+    userId:uuid(),
     roomId,
-    userid:uuid(),
+   
     host:true,
     presenter:true
    };
