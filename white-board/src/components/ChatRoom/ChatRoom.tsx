@@ -1,70 +1,88 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Socket } from 'socket.io-client';
-import './chatroom.css'
+import './chatroom.css';
 
 interface Message {
   message: string;
   name: string;
+
 }
 
-interface Props{
-  setOpenedChatTab:(value:boolean)=>void
-  socket:Socket
+interface Props {
+  setOpenedChatTab: (value: boolean) => void;
+  socket: Socket;
+  userName:string;
 }
-const ChatRoom = ({setOpenedChatTab,socket}:Props) => {
- 
+
+const ChatRoom = ({ setOpenedChatTab, socket,userName }: Props) => {
   const [chat, setChat] = useState<Message[]>([]);
+  const [message, setMessage] = useState('');
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
-   const [message,setMessage]=useState('');
+  useEffect(() => {
+    const storedMessages = localStorage.getItem('chatMessages');
+    if (storedMessages) {
+      setChat(JSON.parse(storedMessages));
+    }
 
-   useEffect(()=>{
-     socket.on("messageResponse",(data:Message)=>{
-      setChat((prevChats)=>[...prevChats,data]);
-     })
-   })
+    const messageResponseHandler = (data: Message) => {
+      console.log("Received message:", data);
+      setChat(prevChats => {
+        const updatedChats = [...prevChats, data];
+        localStorage.setItem('chatMessages', JSON.stringify(updatedChats));
+        return updatedChats;
+      });
+    };
 
-   const handleSubmit=(e:React.FormEvent)=>{
-  e.preventDefault();
-  if(message.trim()!==''){
-    const newMessage:Message= {message,name:'You'}
-  socket.emit("message",{newMessage});
-  setChat((prevChats)=>[...prevChats,newMessage])
-  setMessage('');
-  }
-   }
+    socket.on("messageResponse", messageResponseHandler);
 
+    return () => {
+      socket.off("messageResponse", messageResponseHandler);
+    };
+  }, [socket]);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (message.trim() !== '') {
+      const newMessage: Message = { message, name: userName };
+      socket.emit("message", newMessage);
+      setChat((prevChats) => [...prevChats, newMessage]);
+      localStorage.setItem('chatMessages', JSON.stringify([...chat, newMessage]));
+      setMessage('');
+    }
+  };
+
+  useEffect(() => {
+    // Scroll chat container to bottom when chat updates
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  }, [chat]);
 
   return (
-  
-         <div
-         className="side-box"
-         
-         style={{width:"250px", left: "0%"}}>
-           <button type="button"
-           onClick={()=>setOpenedChatTab(false)} >
-             Close
-           </button>
-      
-           <div className="user-display" style={{height:"70%"}} >
-            { chat.map((msg,index)=>(
-<p key={index}>
-  {msg.name}{msg.message}
-</p>
-             ))}
+    <div className="side-box" style={{ width: "250px", left: "0%" }}>
+      <button className="cht-close-btn" type="button" onClick={() => setOpenedChatTab(false)}>Close</button>
+      <div className="user-display" style={{ height: "93%", overflowY: "auto" }} ref={chatContainerRef}>
+        {chat.map((msg, index) => (
+          <p className="side-box-users" key={index}>
+            {msg.name}: {msg.message || "<No message>"}
+          </p>
+        ))}
+      </div>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Enter message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          />
+          <button className="cht-send-btn" type="submit">Send</button>
+        </form>
+      </div>
+    </div>
+  );
+};
 
-           </div>
-           <div>
-            <form onSubmit={handleSubmit}>
-            <input type="text"
-             placeholder="Enter message"
-             value={message}
-             onChange={(e)=>setMessage(e.target.value)}
-             />
-            <button type="submit">Send</button>
-            </form>
-           </div>
-         </div>
-       )
-     }
+export default ChatRoom;
 
-export default ChatRoom

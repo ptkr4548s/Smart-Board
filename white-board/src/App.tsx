@@ -11,7 +11,7 @@ import Signup from './components/Signup/Signup';
 import Home from './pages/Homepage/Home';
 import { useEffect, useState } from 'react';
 
-const server = "http://localhost:8000";
+const server = "https://drawingboard.onrender.com";
 
 interface JoinedUsers {
   name: string;
@@ -35,7 +35,7 @@ const connectionOptions: {
 const socket : Socket = io(server, connectionOptions);
 
 const App=() => {
-  const [ loginUser, setLoginUser] = useState({})
+ 
 
   const [user, setUser] = useState({
     name: '',
@@ -46,6 +46,7 @@ const App=() => {
   });
 
   const [users, setUsers] = useState<JoinedUsers[]>([]);
+  
 
   useEffect(()=>{
     socket.on("userIsJoined",(data)=>{
@@ -78,39 +79,18 @@ const App=() => {
   },[])
   
 
-  const uuid = () => {
-    const S4 = () => {
-      return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-    };
-    return (
-      S4() +
-      S4() +
-      "-" +
-      S4() +
-      "-" +
-      S4() +
-      "-" +
-      S4() +
-      "-" +
-      S4() +
-      S4() +
-      S4()
-    );
-  };
-
 
   return (
-<div>
+<div className="App-main">
   <ToastContainer/>
   <Router>
 <Routes>
   <Route path="/" element={<Home/>}/>
-<Route  path="/rooms-join-create" element={<Forms uuid={uuid} socket={socket} setUser={setUser}/>}/>
-<Route  path="/:roomId" element={<Room user={user} socket={socket} users={users}/>}/>
-<Route path="/login" element={  <Login setLoginUser={setLoginUser}/>}/>
-          
-          
-          <Route path="/signup" element={<Signup/>}/>
+<Route  path="/rooms-join" element={<Forms socket={socket} setUser={setUser}/>}/>
+<Route path="/:roomId" element={<Room user={user} socket={socket} users={users} setUsers={setUsers} />} />
+<Route path="/login" element={<Login />} />
+<Route path="/signup" element={<Signup />} />
+
           
          
 </Routes>

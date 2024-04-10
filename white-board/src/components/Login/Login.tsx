@@ -1,49 +1,60 @@
-import  React, {useState} from "react"
-import "./login.css"
-import axios from "axios"
-import { useNavigate } from "react-router-dom"
-
-interface LoginProps {
-    setLoginUser: (user: { email: string; password: string }) => void;
-}
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { handleLogin } from '../../services/authService';
+import './login.css';
 
 
-const Login: React.FC<LoginProps> = ({ setLoginUser }) => {
 
-    const navigate = useNavigate()
 
-    const [ user, setUser] = useState({
-        email:"",
-        password:""
-    })
+const Login = () => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-    const handleChange = (e:React.FormEvent) => {
-        const { name, value } = e.target as HTMLInputElement;
-        setUser({
-            ...user,
-            [name]: value
-        })
-    }
+  
 
-    const login = () => {
-        axios.post("http://localhost:8000/login", user)
-        .then(res => {
-            alert(res.data.message)
-            setLoginUser(res.data.user)
-            navigate("/rooms-join-create")
-        })
-    }
 
-    return (
-        <div className="login">
-            <h1>Login</h1>
-            <input type="text" name="email" value={user.email} onChange={handleChange} placeholder="Enter your Email"></input>
-            <input type="password" name="password" value={user.password} onChange={handleChange}  placeholder="Enter your Password" ></input>
-            <div className="button" onClick={login}>Login</div>
-            <div>or</div>
-            <div className="button" onClick={() => navigate("/register")}>Register</div>
-        </div>
-    )
-}
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    handleLogin(email, password)
+      .then(({ token }) => {
+        localStorage.setItem('token', token);
+        localStorage.setItem('email', email);
+        navigate('/rooms-join');
+      })
+      .catch((error) => {
+        console.error('Login failed:', error);
+   
+      });
+  };
 
-export default Login
+
+
+  return (
+    <div className="login-container">
+      <h2>Login</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button type="submit">Login</button>
+      </form>
+
+      <p className="signup_user">
+        Don't have an account?<Link className="navigate_signup" to="/signup">Sign up</Link>
+      </p>
+    </div>
+  );
+};
+
+export default Login;
+

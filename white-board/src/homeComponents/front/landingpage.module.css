@@ -1,0 +1,151 @@
+.mainlanding {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  font-family: sans-serif;
+  width:100%;
+  
+}
+
+.imageContainer1 {
+
+  width:22%;
+}
+.imageContainer2 {
+
+  width:22%;
+}
+
+.image {
+  max-width: 100%;
+  height: 500px;
+
+}
+.content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 80px 20px;
+width:40%;
+}
+
+.content h1{
+  color: #282C33;
+}
+.title{
+  font-weight: 700;
+    line-height: 1;
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
+
+.content p {
+  color: #282C33;
+}
+.description{
+  font-size: 20px;
+    font-weight: 400;
+    line-height: 1.35;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.orText{
+  height: 3px;
+  width:400px;
+  background: rgb(124, 123, 123);
+}
+
+.buttons {
+  gap:13px;
+  display: flex;
+  flex-direction: column;
+}
+
+.createButton,
+.collaborateButton {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color:#282C33;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.createButton:hover,
+.collaborateButton:hover {
+  background-color: #727376;
+}
+
+.orText {
+  font-size: 1rem;
+  margin: 15px;
+  color: #999;
+}
+
+.cbRoom{
+  color:white;
+}
+
+@media screen and (max-width: 768px) {
+  .mainlanding {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .imageContainer1 {
+
+    width:100%;
+  }
+  .imageContainer2 {
+  
+    width:100%;
+  }
+  
+  .image {
+    max-width: 100%;
+    height: auto;
+  
+  }
+  .content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 80px 20px;
+  width:100%;
+  
+  }
+
+  .title {
+    font-size: 2.8rem;
+  }
+
+  .createButton,
+.collaborateButton {
+  padding: 10px 10px;
+  font-size: 1rem;
+  background-color:#282C33;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.orText{
+  height: 3px;
+  width:200px;
+  background: rgb(124, 123, 123);
+}
+
+}
+
+  

@@ -1,0 +1,70 @@
+/* createroom.css */
+
+/* Form container */
+.createroom-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #FFFBF5;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .input-group {
+    margin-bottom: 20px;
+  }
+  
+  /* Input field styles */
+  .input-group input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    font-size: 16px;
+    width: 300px; 
+  }
+  
+  /* Placeholder text styles */
+  .input-group input[type="text"]::placeholder {
+    color: #999; 
+  }
+  
+  /* Button group styles */
+  .button-group {
+    margin-top: 10px;
+  }
+  
+  /* Button styles */
+  .button-group button {
+    padding: 10px 20px;
+    margin-right: 10px; 
+    background-color: #5b25be;
+    color: #fff; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button-group button:hover {
+    background-color:  #3c1682 ; 
+  }
+  .solo-button  {
+    padding: 10px 20px;
+    margin-right: 10px; 
+    background-color: #5b25be; 
+    color: #fff; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .solo-button:hover {
+    background-color: #3c1682 ; 
+  }
+
+  .error-message-c{
+    text-align: left;
+    color: red;
+    margin-top: 10px;
+  }

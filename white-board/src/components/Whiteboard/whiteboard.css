@@ -1,11 +1,15 @@
 
-.main-can{
+.main-can1{
     height:100%;
     width:100%;
     border: 1px solid black;
     overflow: hidden;
 }
-.rt-img{
-    width:100%;
-    height:100%;
+
+.main-head-room{
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin: 0 auto;
 }
+

@@ -1,0 +1,122 @@
+.rectanglegrandparent{
+    margin-top: 150px;
+    margin-bottom: 50px;
+    font-family: sans-serif;
+    
+}
+
+.rectangleparent{
+    max-width: 1296px;
+}
+.rightsidecardmr{
+    width: 50%;
+    padding-top: 2em;
+    margin: 0 auto;
+}
+.imagescardmr{
+  margin-right: -30px;
+}
+.imagescardmr img{
+    width: 540.8px;
+    height: 400px;
+   border-radius: 8px;
+   
+}
+.rectangleparent{
+    border-radius: 8px;
+    display: flex;
+    gap: 2em;
+    background-color: #C3ACD0;
+   width: 90%;
+   margin: 0 auto;
+   justify-content: center;
+   align-items: center;
+}
+.whitehow{
+    margin-top:20px;
+    color: #e4ebe4;
+}
+.bigheadparent{
+    width: 75%;
+    margin-bottom: 1.5em;
+
+}
+.bighead{
+    font-size: 56px;
+    line-height: 100%;
+    font-weight: 600;
+    color: #7743DB;
+}
+.smallhead{
+    margin-left: 10px;
+    font-size: 22px;
+    line-height: 0%;
+    color: white;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 500;
+    font-style: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    opacity: .9;
+}
+.pointsmr{
+    color: #e4ebe4;
+}
+.buttonrectangularcard{
+    cursor: pointer;
+    font-family: stolzl,sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 21px;
+    text-decoration: none;
+    text-transform: none;
+    letter-spacing: 0;
+    background-color: #e4ebe4;
+    text-align: center;
+    width: 120px;
+    padding: 12px;
+    border-radius: 30px;
+    margin-top: 2em;
+    color: black;
+  }
+  @media screen and (max-width: 767px){
+    .imagescardmr{
+        margin-right: 0px;
+      }
+    .rectanglegrandparent{
+        margin-top: 50px;
+        margin-bottom: 0px;
+        
+    }
+    .rectangleparent{
+        flex-direction: column-reverse;
+    }
+    .rectangleparent{
+        width: 100%;
+    }
+    .imagescardmr img{
+        width: 100vw;
+        height: 255px;
+       border-radius: 8px;
+       margin:0px;
+    }
+    .rightsidecardmr{
+        width: 90%;
+    }
+    .bigheadparent{
+        width: 95%;
+    
+    }
+    .rightsidecardmr{
+        padding-top: 0;
+    }
+    .bighead{
+        font-size: 40px;
+    }
+    .whitehow{
+        margin-top:20px;
+    }
+  }
