@@ -77,7 +77,7 @@ const Footer = () => {
     <p>&copy; 2024 Something. All rights reserved.</p>
     
     <div className="legal__links">
-      <span>Made with <span className="heart">♥</span> by Kashyap</span>
+      <span>Made with <span className="heart">♥</span> by Prashant</span>
     </div>
   </div>
 </footer>
